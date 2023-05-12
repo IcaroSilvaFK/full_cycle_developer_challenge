@@ -51,5 +51,4 @@ func initializeTables(db *sql.DB) {
 	stmt.Exec()
 
 	fmt.Println("Execute create table")
-
 }
