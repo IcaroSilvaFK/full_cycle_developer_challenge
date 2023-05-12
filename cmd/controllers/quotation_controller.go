@@ -23,7 +23,7 @@ func QuotationController(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	ctx, cancel := context.WithTimeout(ctx, 600*time.Millisecond)
+	ctx, cancel := context.WithTimeout(ctx, 200*time.Millisecond)
 
 	svc := services.NewQuotationService(ctx)
 
@@ -34,7 +34,7 @@ func QuotationController(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("content-type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"message":"Internal server error"}`))
+		w.Write([]byte(`{"message":` + err.Error() + `}`))
 		return
 	}
 
