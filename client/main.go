@@ -12,7 +12,7 @@ import (
 )
 
 type Response struct {
-	Bid string `json:"bid"`
+	Bid float64 `json:"bid"`
 }
 
 func main() {
@@ -35,7 +35,7 @@ func main() {
 
 	defer r.Body.Close()
 
-	f, err := os.Open("cotacao.txt")
+	f, err := os.Create("cotacao.txt")
 
 	if err != nil {
 		log.Fatal(err)
@@ -56,6 +56,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(response)
+	if _, err := f.WriteString(fmt.Sprintf("Dolar:%v", response.Bid)); err != nil {
+		log.Fatal(err)
+	}
 
 }
